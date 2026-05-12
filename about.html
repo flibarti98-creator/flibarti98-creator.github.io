@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bartosz Flis | O mnie</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-right { display: flex; flex-direction: column; gap: 2rem; }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      border: 1px solid var(--border); background: var(--surface);
+      padding: 1.5rem 1rem; text-align: center; position: relative;
+      overflow: hidden; transition: all 0.3s;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--green); transform: scaleX(0); transition: transform 0.3s;
+    }
+    .stat-card:hover::before { transform: scaleX(1); }
+    .stat-card:hover { box-shadow: 0 0 20px var(--green-glow); }
+    .stat-num { font-family: var(--font-display); font-size: 2.2rem; color: var(--green); font-weight: 900; text-shadow: 0 0 20px var(--green); }
+    .stat-label { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 1px; margin-top: 0.4rem; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1rem; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -2.4rem; top: 6px;
+      width: 10px; height: 10px; background: var(--green);
+      border-radius: 50%; box-shadow: 0 0 10px var(--green);
+    }
+    .timeline-date { font-size: 0.75rem; color: var(--green); letter-spacing: 2px; margin-bottom: 4px; }
+    .timeline-title { color: var(--white); font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 4px; }
+    .timeline-desc { color: var(--text-dim); font-size: 0.8rem; line-height: 1.8; }
+
+    /* Hobbies */
+    .hobbies-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .hobby-chip {
+      border: 1px solid var(--border); padding: 6px 14px;
+      font-size: 0.8rem; color: var(--text-dim); transition: all 0.3s;
+    }
+    .hobby-chip:hover { color: var(--green); border-color: var(--green); box-shadow: 0 0 10px var(--green-glow); }
+
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">&lt;BF /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="index.html">_home</a></li>
+      <li><a href="about.html">_o_mnie</a></li>
+      <li><a href="skills.html">_skills</a></li>
+      <li><a href="projects.html">_projekty</a></li>
+      <li><a href="contact.html">_kontakt</a></li>
+    </ul>
+    <div class="nav-status"><span class="blink">▮</span> ONLINE</div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="section-header fade-in">
+      <span class="section-num">01.</span>
+      <h1>O MNIE</h1>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-grid">
+      <!-- TERMINAL -->
+      <div class="terminal fade-in">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green-dot"></span>
+          <span class="terminal-title">bartosz@portfolio:~/about$</span>
+        </div>
+        <div class="terminal-body">
+          <p><span class="prompt">$</span> whoami</p>
+          <p class="output">Bartosz Flis — 20 lat, Tarnów, Polska</p>
+          <br/>
+          <p><span class="prompt">$</span> cat uczelnia.txt</p>
+          <p class="output">Akademia Tarnowska im. Komisji Edukacji Narodowej</p>
+          <p class="output">Kierunek: Informatyka | Rok: I</p>
+          <br/>
+          <p><span class="prompt">$</span> cat matura.txt</p>
+          <p class="output">✓ Matura zdana</p>
+          <p class="output">✓ Informatyka: 58% — wynik pozytywny</p>
+          <p class="output">✓ Matematyka: dobry poziom</p>
+          <br/>
+          <p><span class="prompt">$</span> cat about_me.txt</p>
+          <p class="output">Cześć! Jestem Bartosz. Dopiero zaczynam swoją</p>
+          <p class="output">przygodę z programowaniem na poziomie akademickim,</p>
+          <p class="output">ale ambitnie podchodzę do każdego wyzwania.</p>
+          <p class="output">Lubię rozwiązywać problemy, rysować w AutoCAD</p>
+          <p class="output">i ciągle rozwijać swój kod. Git to mój przyjaciel 🚀</p>
+          <br/>
+          <p><span class="prompt">$</span> <span class="blink">▮</span></p>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <!-- STATS -->
+        <div class="stats-grid fade-in">
+          <div class="stat-card">
+            <div class="stat-num">20</div>
+            <div class="stat-label">Lat</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">I</div>
+            <div class="stat-label">Rok studiów</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">58%</div>
+            <div class="stat-label">Matura Inf.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Chęci do nauki</div>
+          </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="card fade-in">
+          <div style="margin-bottom:1rem; font-family:var(--font-display); font-size:0.8rem; color:var(--green); letter-spacing:2px;">// HISTORIA</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2025 — teraz</div>
+              <div class="timeline-title">🎓 Student Informatyki</div>
+              <div class="timeline-desc">Akademia Tarnowska — uczę się, koduję, rozwijam się każdego dnia.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2025</div>
+              <div class="timeline-title">📜 Matura z Informatyki</div>
+              <div class="timeline-desc">58% — udowodniłem że wiem co robię. Czas na głębszy poziom.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Przeszłość</div>
+              <div class="timeline-title">🖊️ AutoCAD & Technikum</div>
+              <div class="timeline-desc">Nauczyłem się projektowania technicznego — precyzja i logika w każdym rysunku.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Cel: 2028+</div>
+              <div class="timeline-title">🚀 Full-Stack Developer</div>
+              <div class="timeline-desc">Mój cel — zostać doświadczonym programistą i pracować nad prawdziwymi projektami.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOBBIES -->
+        <div class="card fade-in">
+          <div style="margin-bottom:1rem; font-family:var(--font-display); font-size:0.8rem; color:var(--green); letter-spacing:2px;">// ZAINTERESOWANIA</div>
+          <div class="hobbies-row">
+            <span class="hobby-chip">💻 Programowanie</span>
+            <span class="hobby-chip">📐 AutoCAD</span>
+            <span class="hobby-chip">🎮 Gaming</span>
+            <span class="hobby-chip">🧮 Matematyka</span>
+            <span class="hobby-chip">🌐 Web Dev</span>
+            <span class="hobby-chip">🔧 Algorytmy</span>
+            <span class="hobby-chip">📚 Nauka</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="skills.html" class="btn fade-in">[ MOJE UMIEJĘTNOŚCI → ]</a>
+      <a href="contact.html" class="btn fade-in">[ SKONTAKTUJ SIĘ → ]</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>// <span class="green">Bartosz Flis</span> © 2025 | Akademia Tarnowska | IT</p>
+  </footer>
+
+  <script src="matrix.js"></script>
+</body>
+</html>

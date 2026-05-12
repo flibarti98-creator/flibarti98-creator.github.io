@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bartosz Flis | Kontakt</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+    /* LEFT — Terminal form */
+    .contact-form-terminal { }
+    .form-row { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-size: 0.78rem; color: var(--green); letter-spacing: 2px; margin-bottom: 6px; }
+    .form-input, .form-textarea {
+      width: 100%; background: rgba(0,20,0,0.6); border: 1px solid var(--border);
+      color: var(--text); font-family: var(--font-mono); font-size: 0.9rem;
+      padding: 12px 16px; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--green); box-shadow: 0 0 12px var(--green-glow);
+    }
+    .form-textarea { min-height: 140px; }
+    .form-submit {
+      width: 100%; background: transparent; border: 1px solid var(--green);
+      color: var(--green); font-family: var(--font-display); font-size: 0.85rem;
+      letter-spacing: 3px; padding: 14px; cursor: none; position: relative; overflow: hidden;
+      transition: all 0.3s;
+    }
+    .form-submit::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: var(--green); transition: left 0.3s; z-index: -1;
+    }
+    .form-submit:hover::before { left: 0; }
+    .form-submit:hover { color: var(--black); box-shadow: 0 0 20px var(--green-glow); }
+
+    /* RIGHT — Contact info */
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .contact-card {
+      border: 1px solid var(--border); background: var(--surface); padding: 1.5rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      text-decoration: none; transition: all 0.3s; color: var(--text);
+    }
+    .contact-card:hover { border-color: var(--green); box-shadow: 0 0 15px var(--green-glow); transform: translateX(6px); }
+    .contact-card-icon { font-size: 2rem; min-width: 48px; text-align: center; }
+    .contact-card-label { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 4px; }
+    .contact-card-value { color: var(--green); font-size: 0.95rem; letter-spacing: 1px; }
+
+    /* Status */
+    .availability {
+      border: 1px solid var(--green); background: rgba(0,255,65,0.05);
+      padding: 1.5rem; text-align: center;
+    }
+    .avail-dot { display: inline-block; width: 10px; height: 10px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green); animation: pulse 2s ease-in-out infinite; margin-right: 8px; }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.3);opacity:0.7;} }
+    .avail-text { color: var(--green); font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; }
+    .avail-sub { color: var(--text-dim); font-size: 0.75rem; margin-top: 8px; letter-spacing: 1px; }
+
+    /* Terminal output */
+    .send-output { display: none; margin-top: 1rem; padding: 1rem; background: rgba(0,20,0,0.6); border: 1px solid var(--green); color: var(--green); font-size: 0.85rem; }
+
+    @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">&lt;BF /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="index.html">_home</a></li>
+      <li><a href="about.html">_o_mnie</a></li>
+      <li><a href="skills.html">_skills</a></li>
+      <li><a href="projects.html">_projekty</a></li>
+      <li><a href="contact.html">_kontakt</a></li>
+    </ul>
+    <div class="nav-status"><span class="blink">▮</span> ONLINE</div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="section-header fade-in">
+      <span class="section-num">04.</span>
+      <h1>KONTAKT</h1>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="contact-layout">
+
+      <!-- FORM TERMINAL -->
+      <div class="terminal fade-in">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green-dot"></span>
+          <span class="terminal-title">bartosz@portfolio:~/contact$ ping --send</span>
+        </div>
+        <div class="terminal-body">
+          <p style="margin-bottom:1.5rem;"><span class="prompt">$</span> <span style="color:var(--text-dim)">Wypełnij formularz i wyślij wiadomość:</span></p>
+
+          <div class="form-row">
+            <label class="form-label">// TWOJE IMIĘ:</label>
+            <input type="text" class="form-input" id="fname" placeholder="Jan Kowalski" />
+          </div>
+          <div class="form-row">
+            <label class="form-label">// EMAIL:</label>
+            <input type="email" class="form-input" id="femail" placeholder="jan@example.com" />
+          </div>
+          <div class="form-row">
+            <label class="form-label">// WIADOMOŚĆ:</label>
+            <textarea class="form-textarea" id="fmsg" placeholder="Cześć Bartosz, chciałem/am..."></textarea>
+          </div>
+          <button class="form-submit" onclick="handleSend()">[ WYŚLIJ SYGNAŁ → ]</button>
+          <div class="send-output" id="sendOutput">
+            <span class="prompt">$</span> Wiadomość wysłana pomyślnie! ✓<br/>
+            <span class="prompt">$</span> Odpowiem tak szybko jak to możliwe.<br/>
+            <span class="prompt">$</span> <span class="blink">▮</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div class="contact-info">
+        <div class="availability fade-in">
+          <div><span class="avail-dot"></span><span class="avail-text">DOSTĘPNY</span></div>
+          <div class="avail-sub">Otwarty na współpracę i nowe projekty 🚀</div>
+        </div>
+
+        <a href="mailto:bartosz.flis@example.com" class="contact-card fade-in">
+          <span class="contact-card-icon">✉️</span>
+          <div>
+            <div class="contact-card-label">// EMAIL</div>
+            <div class="contact-card-value">bartosz.flis@example.com</div>
+          </div>
+        </a>
+
+        <a href="https://github.com/bartoszflis" target="_blank" class="contact-card fade-in">
+          <span class="contact-card-icon">🐙</span>
+          <div>
+            <div class="contact-card-label">// GITHUB</div>
+            <div class="contact-card-value">github.com/bartoszflis</div>
+          </div>
+        </a>
+
+        <a href="https://linkedin.com/in/bartoszflis" target="_blank" class="contact-card fade-in">
+          <span class="contact-card-icon">💼</span>
+          <div>
+            <div class="contact-card-label">// LINKEDIN</div>
+            <div class="contact-card-value">linkedin.com/in/bartoszflis</div>
+          </div>
+        </a>
+
+        <div class="card fade-in" style="font-size:0.82rem; color:var(--text-dim); line-height:2;">
+          <div style="color:var(--green); font-family:var(--font-display); font-size:0.75rem; letter-spacing:2px; margin-bottom:0.75rem;">// LOKALIZACJA</div>
+          📍 Tarnów, Małopolska, Polska<br/>
+          🎓 Akademia Tarnowska im. KEN<br/>
+          🕐 Strefa czasowa: CET/CEST (UTC+1/+2)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>// <span class="green">Bartosz Flis</span> © 2025 | Akademia Tarnowska | IT</p>
+  </footer>
+
+  <script src="matrix.js"></script>
+  <script>
+    function handleSend() {
+      const name = document.getElementById('fname').value;
+      const email = document.getElementById('femail').value;
+      const msg = document.getElementById('fmsg').value;
+      if (!name || !email || !msg) {
+        alert('// ERROR: Wypełnij wszystkie pola!');
+        return;
+      }
+      const out = document.getElementById('sendOutput');
+      out.style.display = 'block';
+      document.querySelector('.form-submit').textContent = '[ WYSŁANO ✓ ]';
+      document.querySelector('.form-submit').disabled = true;
+    }
+  </script>
+</body>
+</html>
