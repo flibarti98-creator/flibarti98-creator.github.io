@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bartosz Flis | Skills</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    .skills-intro { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 3rem; letter-spacing: 1px; line-height: 2; }
+
+    /* BIG SKILL CARDS */
+    .skills-main { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+    .skill-card {
+      border: 1px solid var(--border); background: var(--surface);
+      padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .skill-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, transparent, var(--green), transparent);
+      transform: scaleX(0); transition: transform 0.4s;
+    }
+    .skill-card:hover::after { transform: scaleX(1); }
+    .skill-card:hover { border-color: var(--green); box-shadow: 0 0 25px rgba(0,255,65,0.08); transform: translateY(-3px); }
+
+    .skill-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .skill-icon-big { font-size: 2.5rem; filter: drop-shadow(0 0 8px var(--green)); }
+    .skill-card-title { font-family: var(--font-display); font-size: 1rem; color: var(--white); letter-spacing: 2px; }
+    .skill-card-level { font-size: 0.7rem; color: var(--green); letter-spacing: 1px; margin-top: 3px; }
+
+    .skill-bar-wrap { height: 8px; background: var(--green-dark); border: 1px solid var(--border); overflow: hidden; margin-bottom: 0.5rem; }
+    .skill-bar { height: 100%; width: 0; background: linear-gradient(to right, #003b00, #00ff41); transition: width 1.5s cubic-bezier(0.4,0,0.2,1); position: relative; }
+    .skill-bar::after { content: ''; position: absolute; right: 0; top: 0; width: 6px; height: 100%; background: #fff; box-shadow: 0 0 10px var(--green); }
+
+    .skill-percent-row { display: flex; justify-content: space-between; font-size: 0.75rem; }
+    .skill-pct { color: var(--green); }
+    .skill-lvl-label { color: var(--text-dim); }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+    .skill-tag { background: rgba(0,255,65,0.07); border: 1px solid var(--border); color: var(--text-dim); padding: 3px 10px; font-size: 0.72rem; letter-spacing: 1px; }
+
+    /* LEARNING NOW */
+    .learning-section h2 { font-family: var(--font-display); font-size: 1rem; color: var(--green); letter-spacing: 3px; margin-bottom: 1.5rem; }
+    .learning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .learning-card {
+      border: 1px solid var(--border); background: var(--surface); padding: 1.2rem 1rem;
+      display: flex; align-items: center; gap: 1rem; transition: all 0.3s;
+    }
+    .learning-card:hover { border-color: var(--green); box-shadow: 0 0 12px var(--green-glow); }
+    .learning-icon { font-size: 1.5rem; }
+    .learning-name { font-size: 0.85rem; color: var(--white); letter-spacing: 1px; }
+    .learning-status { font-size: 0.7rem; color: var(--green); }
+
+    @media (max-width: 768px) { .skills-main { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">&lt;BF /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="index.html">_home</a></li>
+      <li><a href="about.html">_o_mnie</a></li>
+      <li><a href="skills.html">_skills</a></li>
+      <li><a href="projects.html">_projekty</a></li>
+      <li><a href="contact.html">_kontakt</a></li>
+    </ul>
+    <div class="nav-status"><span class="blink">▮</span> ONLINE</div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="section-header fade-in">
+      <span class="section-num">02.</span>
+      <h1>UMIEJĘTNOŚCI</h1>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="skills-intro fade-in">
+      // Zbiór technologii i narzędzi które opanowałem lub aktywnie rozwijam.<br/>
+      // Każdy pasek to uczciwa samoocena — bez ściemy. 💪
+    </p>
+
+    <div class="skills-main">
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <span class="skill-icon-big">🌐</span>
+          <div>
+            <div class="skill-card-title">HTML / CSS</div>
+            <div class="skill-card-level">⬛⬛⬛⬛⬜ ZAAWANSOWANY</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div>
+        <div class="skill-percent-row"><span class="skill-pct">75%</span><span class="skill-lvl-label">Dobry poziom</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Semantyka</span><span class="skill-tag">Flexbox</span>
+          <span class="skill-tag">Grid</span><span class="skill-tag">Animacje CSS</span>
+          <span class="skill-tag">Responsive</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <span class="skill-icon-big">⚡</span>
+          <div>
+            <div class="skill-card-title">JAVASCRIPT</div>
+            <div class="skill-card-level">⬛⬛⬛⬛⬜ ZAAWANSOWANY</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-width="70"></div></div>
+        <div class="skill-percent-row"><span class="skill-pct">70%</span><span class="skill-lvl-label">Dobry poziom</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">DOM</span><span class="skill-tag">ES6+</span>
+          <span class="skill-tag">Async</span><span class="skill-tag">Canvas API</span>
+          <span class="skill-tag">Animacje JS</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <span class="skill-icon-big">⚙️</span>
+          <div>
+            <div class="skill-card-title">C / C++</div>
+            <div class="skill-card-level">⬛⬛⬜⬜⬜ PODSTAWY+</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-width="50"></div></div>
+        <div class="skill-percent-row"><span class="skill-pct">50%</span><span class="skill-lvl-label">Średni poziom</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Wskaźniki</span><span class="skill-tag">Funkcje</span>
+          <span class="skill-tag">Tablice</span><span class="skill-tag">OOP (C++)</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <span class="skill-icon-big">📐</span>
+          <div>
+            <div class="skill-card-title">AUTOCAD</div>
+            <div class="skill-card-level">⬛⬛⬛⬛⬜ ZAAWANSOWANY</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
+        <div class="skill-percent-row"><span class="skill-pct">80%</span><span class="skill-lvl-label">Zaawansowany</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">2D</span><span class="skill-tag">Rzuty techniczne</span>
+          <span class="skill-tag">Wymiarowanie</span><span class="skill-tag">Bloki</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <span class="skill-icon-big">🔀</span>
+          <div>
+            <div class="skill-card-title">GIT / GITHUB</div>
+            <div class="skill-card-level">⬛⬛⬛⬜⬜ ŚREDNI</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-width="65"></div></div>
+        <div class="skill-percent-row"><span class="skill-pct">65%</span><span class="skill-lvl-label">Dobry poziom</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">commit</span><span class="skill-tag">push/pull</span>
+          <span class="skill-tag">branches</span><span class="skill-tag">Pull Request</span>
+          <span class="skill-tag">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <span class="skill-icon-big">🧮</span>
+          <div>
+            <div class="skill-card-title">MATEMATYKA</div>
+            <div class="skill-card-level">⬛⬛⬛⬜⬜ DOBRY</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" data-width="65"></div></div>
+        <div class="skill-percent-row"><span class="skill-pct">65%</span><span class="skill-lvl-label">Dobry poziom</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Algebra</span><span class="skill-tag">Logika</span>
+          <span class="skill-tag">Macierze</span><span class="skill-tag">Matura ✓</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CURRENTLY LEARNING -->
+    <div class="learning-section fade-in">
+      <h2>// AKTUALNIE SIĘ UCZĘ</h2>
+      <div class="learning-grid">
+        <div class="learning-card">
+          <span class="learning-icon">⚛️</span>
+          <div><div class="learning-name">React.js</div><div class="learning-status">▶ W trakcie</div></div>
+        </div>
+        <div class="learning-card">
+          <span class="learning-icon">🐍</span>
+          <div><div class="learning-name">Python</div><div class="learning-status">▶ Planuję</div></div>
+        </div>
+        <div class="learning-card">
+          <span class="learning-icon">🗄️</span>
+          <div><div class="learning-name">SQL / Bazy danych</div><div class="learning-status">▶ Uczelnia</div></div>
+        </div>
+        <div class="learning-card">
+          <span class="learning-icon">🐧</span>
+          <div><div class="learning-name">Linux</div><div class="learning-status">▶ Eksperymentuję</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="projects.html" class="btn fade-in">[ MOJE PROJEKTY → ]</a>
+      <a href="about.html" class="btn fade-in">[ ← O MNIE ]</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>// <span class="green">Bartosz Flis</span> © 2025 | Akademia Tarnowska | IT</p>
+  </footer>
+
+  <script src="matrix.js"></script>
+  <script>
+    // Animate skill bars on scroll
+    const bars = document.querySelectorAll('.skill-bar');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.style.width = e.target.dataset.width + '%'; } });
+    }, { threshold: 0.3 });
+    bars.forEach(b => obs.observe(b));
+  </script>
+</body>
+</html>

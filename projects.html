@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bartosz Flis | Projekty</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    .projects-intro { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 3rem; letter-spacing: 1px; line-height: 2; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+
+    .project-card {
+      border: 1px solid var(--border); background: var(--surface);
+      padding: 2rem; transition: all 0.3s; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover { border-color: var(--green); box-shadow: 0 0 30px rgba(0,255,65,0.1); transform: translateY(-4px); }
+    .project-card.coming { opacity: 0.5; }
+    .project-card.coming:hover { opacity: 0.75; }
+
+    .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+    .project-icon { font-size: 2.5rem; filter: drop-shadow(0 0 6px var(--green)); }
+    .project-links { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+    .proj-link {
+      color: var(--text-dim); text-decoration: none; font-size: 0.78rem;
+      letter-spacing: 1px; transition: color 0.2s; border-bottom: 1px solid transparent;
+    }
+    .proj-link:hover { color: var(--green); border-bottom-color: var(--green); }
+
+    .project-number { font-family: var(--font-display); font-size: 0.65rem; color: var(--green); letter-spacing: 3px; margin-bottom: 0.5rem; opacity: 0.6; }
+    .project-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); letter-spacing: 2px; margin-bottom: 1rem; }
+    .project-desc { font-size: 0.84rem; color: var(--text-dim); line-height: 1.9; flex: 1; margin-bottom: 1.5rem; }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+    .project-tag { background: rgba(0,255,65,0.07); border: 1px solid var(--border); color: var(--green); padding: 3px 10px; font-size: 0.72rem; letter-spacing: 1px; }
+
+    .project-status { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 1px; }
+    .project-status .dot-status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+    .dot-status.done { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .dot-status.wip { background: var(--yellow,#ffff00); animation: blink 1s step-end infinite; }
+    .dot-status.planned { background: var(--text-dim); }
+
+    /* GITHUB WORKFLOW BOX */
+    .workflow-box { border: 1px solid var(--border); background: var(--surface); padding: 2rem; }
+    .workflow-box h2 { font-family: var(--font-display); font-size: 0.9rem; color: var(--green); letter-spacing: 3px; margin-bottom: 1.5rem; }
+    .workflow-steps { display: flex; flex-direction: column; gap: 1rem; }
+    .wf-step { display: flex; align-items: flex-start; gap: 1rem; }
+    .wf-num { font-family: var(--font-display); color: var(--green); font-size: 0.85rem; min-width: 28px; margin-top: 2px; }
+    .wf-content { font-size: 0.82rem; color: var(--text-dim); line-height: 1.8; }
+    .wf-cmd { color: var(--green); font-family: var(--font-code); }
+
+    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
+    @media (max-width: 768px) { .projects-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">&lt;BF /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="index.html">_home</a></li>
+      <li><a href="about.html">_o_mnie</a></li>
+      <li><a href="skills.html">_skills</a></li>
+      <li><a href="projects.html">_projekty</a></li>
+      <li><a href="contact.html">_kontakt</a></li>
+    </ul>
+    <div class="nav-status"><span class="blink">▮</span> ONLINE</div>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="section-header fade-in">
+      <span class="section-num">03.</span>
+      <h1>PROJEKTY</h1>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="projects-intro fade-in">
+      // Repozytorium moich prac — od zaliczeniowych po własne projekty.<br/>
+      // Każdy projekt to nowa lekcja. Każdy commit to postęp. 🔥
+    </p>
+
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-top">
+          <span class="project-icon">🌐</span>
+          <div class="project-links">
+            <a href="https://github.com/" target="_blank" class="proj-link">GitHub ↗</a>
+            <a href="index.html" class="proj-link">Live ↗</a>
+          </div>
+        </div>
+        <div class="project-number">PROJECT_001</div>
+        <h3 class="project-title">Portfolio Website</h3>
+        <p class="project-desc">Strona wizytówka z efektem Matrix, animowanym tłem canvas, typing effect i wieloma podstronami. Napisana w czystym HTML/CSS/JS — zero frameworków.</p>
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">Canvas API</span>
+          <span class="project-tag">Git</span>
+        </div>
+        <div class="project-status"><span class="dot-status done"></span>UKOŃCZONY</div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-top">
+          <span class="project-icon">⚙️</span>
+          <div class="project-links">
+            <a href="https://github.com/" target="_blank" class="proj-link">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="project-number">PROJECT_002</div>
+        <h3 class="project-title">Projekt C++ — Zaliczenie</h3>
+        <p class="project-desc">Projekt zaliczeniowy napisany w C/C++. Praca z tablicami, wskaźnikami, funkcjami i strukturami danych. Pierwszy poważny program na studiach.</p>
+        <div class="project-tags">
+          <span class="project-tag">C++</span>
+          <span class="project-tag">Algorytmy</span>
+          <span class="project-tag">Struktury danych</span>
+        </div>
+        <div class="project-status"><span class="dot-status done"></span>UKOŃCZONY</div>
+      </div>
+
+      <div class="project-card coming fade-in">
+        <div class="project-top">
+          <span class="project-icon">🔒</span>
+        </div>
+        <div class="project-number">PROJECT_003</div>
+        <h3 class="project-title">??? — Nowy projekt</h3>
+        <p class="project-desc">Coś nowego rodzi się w systemie... Projekt w fazie planowania. Wróć wkrótce — system pracuje w tle.</p>
+        <div class="project-tags">
+          <span class="project-tag">COMING SOON</span>
+        </div>
+        <div class="project-status"><span class="dot-status wip"></span>W TRAKCIE</div>
+      </div>
+
+      <div class="project-card coming fade-in">
+        <div class="project-top">
+          <span class="project-icon">🔒</span>
+        </div>
+        <div class="project-number">PROJECT_004</div>
+        <h3 class="project-title">??? — Zaplanowany</h3>
+        <p class="project-desc">Przyszły projekt — cel to praca z bazą danych lub React. Nauka poprzez działanie.</p>
+        <div class="project-tags">
+          <span class="project-tag">PLANNED</span>
+        </div>
+        <div class="project-status"><span class="dot-status planned"></span>ZAPLANOWANY</div>
+      </div>
+
+    </div>
+
+    <!-- GITHUB WORKFLOW -->
+    <div class="workflow-box fade-in">
+      <h2>// WORKFLOW — JAK PRACUJĘ Z GIT</h2>
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <span class="wf-num">01.</span>
+          <div class="wf-content">Checkout gałęzi developerskiej: <span class="wf-cmd">git checkout develop</span></div>
+        </div>
+        <div class="wf-step">
+          <span class="wf-num">02.</span>
+          <div class="wf-content">Tworzę nową gałąź funkcjonalności: <span class="wf-cmd">git checkout -b feature-nazwa</span></div>
+        </div>
+        <div class="wf-step">
+          <span class="wf-num">03.</span>
+          <div class="wf-content">Implementuję kod (HTML, CSS, JS).</div>
+        </div>
+        <div class="wf-step">
+          <span class="wf-num">04.</span>
+          <div class="wf-content">Zatwierdzam zmiany: <span class="wf-cmd">git add . && git commit -m "feat: opis"</span></div>
+        </div>
+        <div class="wf-step">
+          <span class="wf-num">05.</span>
+          <div class="wf-content">Push do zdalnego repo: <span class="wf-cmd">git push origin feature-nazwa</span></div>
+        </div>
+        <div class="wf-step">
+          <span class="wf-num">06.</span>
+          <div class="wf-content">Tworzę Pull Request do gałęzi <span class="wf-cmd">develop</span> na GitHub → Code Review → Merge (Create a merge commit)</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="contact.html" class="btn fade-in">[ KONTAKT → ]</a>
+      <a href="skills.html" class="btn fade-in">[ ← SKILLS ]</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>// <span class="green">Bartosz Flis</span> © 2025 | Akademia Tarnowska | IT</p>
+  </footer>
+
+  <script src="matrix.js"></script>
+</body>
+</html>
